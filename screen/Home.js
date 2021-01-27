@@ -1,79 +1,102 @@
-import React, {useState} from 'react';
-import {
-  StyleSheet,
-  StatusBar,
-  Image,
-  ImageBackground,
-  View,
-  Text,
-  Button,
-} from 'react-native';
-import {AuthContext} from '../providers/AuthProvider';
-
+import React, {useState, useEffect} from 'react';
+import {View, StyleSheet, FlatList, ActivityIndicator} from 'react-native';
+import {Card, Button, Input} from 'react-native-elements';
+import PostCard from '../components/PostCard';
 import HeaderMenu from '../components/HeaderMenu';
+import Entypo from 'react-native-vector-icons/Entypo';
 
-import BG from '../assets/BG.png';
+import {AuthContext} from '../providers/AuthProvider';
+import {getPosts} from '../requests/Posts';
+import loading from '../components/Loading';
 
 const Home = (props) => {
+  const [posts, setPosts] = useState([]);
+
+  const loasPost = async () => {
+    const response = await getPosts();
+    if (response.ok) {
+      setPost(response.data);
+    } else {
+      alert(response.problem);
+    }
+  };
+
+  useEffect(() => {
+    loasPost();
+  }, []);
+
   return (
     <AuthContext.Consumer>
       {(auth) => (
-        <ImageBackground source={BG} style={styles.image}>
+        <View style={styles.viewStyle}>
           <HeaderMenu
             DrawerFunction={() => {
               props.navigation.toggleDrawer();
             }}
           />
-          <StatusBar
-            barStyle="light-content"
-            hidden={false}
-            backgroundColor="transparent"
-            translucent={true}
-          />
+          <Card>
+            <Input
+              placeholder="What's On Your Mind?"
+              leftIcon={<Entypo name="pencil" size={24} color="black" />}
+              onChangeText={(currentText) => {
+                setInput(currentText);
+              }}
+            />
+            <Button
+              title="Post"
+              type="outline"
+              onPress={function () {
+                setLoading(true);
+                // firebase
+                //   .firestore()
+                //   .collection('posts')
+                //   .add({
+                //     userId: auth.CurrentUser.uid,
+                //     body: input,
+                //     author: auth.CurrentUser.displayName,
+                //     created_at: firebase.firestore.Timestamp.now(),
+                //     likes: [],
+                //     comments: [],
+                //   })
+                //   .then(() => {
+                //     setLoading(false);
+                //     alert('Post created Successfully!');
+                //   })
+                //   .catch((error) => {
+                //     setLoading(false);
+                //     alert(error);
+                //   });
+              }}
+            />
+          </Card>
+          <ActivityIndicator size="large" color="red" animating={loading} />
 
-          <Text style={[styles.text, {color: 'red'}]}> Welcome to </Text>
-          <Text style={styles.text}> {auth.CurrentUser.name} !</Text>
-          {/* <View style={styles.card}>
-          <LinearGradient
-            colors={['#5851DB', '#C13584', '#E1306C', '#FD1D1D', '#F77737']}
-            style={styles.card}></LinearGradient>
-        </View> */}
-
-          <Button
-            title="Log Out"
-            onPress={function () {
-              auth.setIsLoggedIn(false);
-              auth.setCurrentUser({});
+          <FlatList
+            data={posts}
+            renderItem={({item}) => {
+              return (
+                <PostCard
+                  author={item.userId}
+                  title={item.title}
+                  body={item.body}
+                />
+              );
             }}
           />
-        </ImageBackground>
+        </View>
       )}
     </AuthContext.Consumer>
   );
 };
 
-export default Home;
-
 const styles = StyleSheet.create({
-  image: {
-    flex: 1,
-    resizeMode: 'cover',
+  textStyle: {
+    fontSize: 30,
+    color: 'blue',
   },
-
-  text: {
-    textAlign: 'center',
-    fontSize: 20,
-    fontWeight: 'bold',
-    margin: 10,
-    padding: 10,
-  },
-  card: {
+  viewStyle: {
     flex: 1,
-    width: 300,
-    height: 500,
-    maxWidth: '80%',
-    maxHeight: '80%',
-    alignSelf: 'center',
-    alignItems: 'center',
   },
 });
+
+export default Home;
