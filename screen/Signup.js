@@ -13,7 +13,7 @@ import Loading from '../components/Loading';
 import * as Animatable from 'react-native-animatable';
 import LinearGradient from 'react-native-linear-gradient';
 import * as firebase from 'firebase';
-
+import 'firebase/firestore/';
 const SignUp = (props) => {
   const [Name, setName] = useState('');
   const [SID, setSID] = useState('');
@@ -118,10 +118,9 @@ const SignUp = (props) => {
                       .then((userCreds) => {
                         userCreds.user.updateProfile({displayName: Name});
                         firebase
-                          .database()
-                          .ref()
-                          .child('users/')
-                          .child(userCreds.user.uid)
+                          .firestore()
+                          .collection('users')
+                          .doc(userCreds.user.uid)
                           .set({
                             name: Name,
                             sid: SID,
