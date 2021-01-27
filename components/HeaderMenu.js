@@ -1,6 +1,6 @@
 import React from 'react';
-import { Header } from 'react-native-elements';
-import { AuthContext } from '../providers/AuthProvider';
+import {Header} from 'react-native-elements';
+import {AuthContext} from '../providers/AuthProvider';
 import * as firebase from 'firebase';
 const HeaderMenu = (props) => {
   return (
@@ -8,14 +8,14 @@ const HeaderMenu = (props) => {
       {(auth) => (
         <Header
           leftComponent={{
-            icon: "menu",
-            color: "#fff",
+            icon: 'menu',
+            color: '#fff',
             onPress: props.DrawerFunction,
           }}
-          centerComponent={{ text: "The Office", style: { color: "#fff" } }}
+          centerComponent={{text: 'Damsonsoft', style: {color: '#fff'}}}
           rightComponent={{
-            icon: "lock-outline",
-            color: "#fff",
+            icon: 'lock-outline',
+            color: '#fff',
             onPress: function () {
               firebase
                 .auth()

@@ -1,11 +1,9 @@
-import { JPCclient } from '../clients/JPClient'
+import {JPClient} from '../clients/JPClient';
 
-const user_endpont = './Users.js'
-
+const user_endpont = '/users';
 
 const getUsers = () => {
+  return JPClient.get(user_endpont);
+};
 
-    return JPCclient.get(user_endpont);
-}
-
-export { getUsers };
+export {getUsers};

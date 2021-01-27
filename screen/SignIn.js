@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {
   View,
   Text,
@@ -11,9 +11,9 @@ import {
 
 import * as Animatable from 'react-native-animatable';
 import LinearGradient from 'react-native-linear-gradient';
-import { AuthContext } from '../providers/AuthProvider';
+import {AuthContext} from '../providers/AuthProvider';
 import * as firebase from 'firebase';
-import Loading from '../components/Loading'
+import Loading from '../components/Loading';
 
 const SignIn = (props) => {
   const [Email, setEmail] = useState('');
@@ -49,7 +49,7 @@ const SignIn = (props) => {
                       setEmail(currentInput);
                     }}
                     placeholderTextColor="#fff"
-                    style={[styles.textInput, { color: '#fff' }]}
+                    style={[styles.textInput, {color: '#fff'}]}
                   />
                 </View>
 
@@ -66,7 +66,7 @@ const SignIn = (props) => {
                     }}
                     placeholderTextColor="#fff"
                     secureTextEntry={true}
-                    style={[styles.textInput, { color: '#fff' }]}
+                    style={[styles.textInput, {color: '#fff'}]}
                   />
                 </View>
 
@@ -75,9 +75,9 @@ const SignIn = (props) => {
                   duration={500}></Animatable.View>
 
                 <TouchableOpacity>
-                  <Text style={{ color: '#fff', marginTop: 10 }}>
+                  <Text style={{color: '#fff', marginTop: 10}}>
                     Forgot password?
-                </Text>
+                  </Text>
                 </TouchableOpacity>
 
                 <View style={styles.button}>
@@ -102,18 +102,26 @@ const SignIn = (props) => {
                       colors={['#8E24AA', '#311B92']}
                       style={styles.signIn}>
                       <Text
-                        style={{ color: '#fff', fontSize: 18, fontWeight: 'bold' }}>
+                        style={{
+                          color: '#fff',
+                          fontSize: 18,
+                          fontWeight: 'bold',
+                        }}>
                         Sign In
-                    </Text>
+                      </Text>
                     </LinearGradient>
                   </TouchableOpacity>
 
                   <TouchableOpacity
                     onPress={() => props.navigation.navigate('SignUp')}>
                     <Text
-                      style={{ textAlign: 'center', color: '#fff', marginTop: 10 }}>
+                      style={{
+                        textAlign: 'center',
+                        color: '#fff',
+                        marginTop: 10,
+                      }}>
                       Don't have an account?
-                    <Text
+                      <Text
                         style={{
                           color: '#55ACEE',
                           paddingLeft: 10,
@@ -121,7 +129,7 @@ const SignIn = (props) => {
                           fontWeight: 'bold',
                         }}>
                         Sign Up
-                    </Text>
+                      </Text>
                     </Text>
                   </TouchableOpacity>
 
@@ -131,37 +139,45 @@ const SignIn = (props) => {
                       alignItems: 'center',
                       margin: 10,
                     }}>
-                    <View style={{ flex: 1, height: 1, backgroundColor: '#fff' }} />
+                    <View
+                      style={{flex: 1, height: 1, backgroundColor: '#fff'}}
+                    />
                     <View>
                       <Text
-                        style={{ width: 50, textAlign: 'center', color: '#fff' }}>
+                        style={{width: 50, textAlign: 'center', color: '#fff'}}>
                         Or
-                    </Text>
+                      </Text>
                     </View>
-                    <View style={{ flex: 1, height: 1, backgroundColor: '#fff' }} />
+                    <View
+                      style={{flex: 1, height: 1, backgroundColor: '#fff'}}
+                    />
                   </View>
 
                   <TouchableOpacity>
                     <Text
-                      style={{ textAlign: 'center', color: '#fff', marginTop: 10 }}>
+                      style={{
+                        textAlign: 'center',
+                        color: '#fff',
+                        marginTop: 10,
+                      }}>
                       Sign In with Social Networks
-                  </Text>
+                    </Text>
                   </TouchableOpacity>
                 </View>
 
                 <View style={styles.iconViewStyle}>
                   <TouchableOpacity
-                    style={[styles.icon, { backgroundColor: '#164CBD' }]}>
+                    style={[styles.icon, {backgroundColor: '#164CBD'}]}>
                     {/* <MaterialCommunityIcons name="facebook" color="#fff" size={25} /> */}
                   </TouchableOpacity>
 
                   <TouchableOpacity
-                    style={[styles.icon, { backgroundColor: '#55ACEE' }]}>
+                    style={[styles.icon, {backgroundColor: '#55ACEE'}]}>
                     {/* <MaterialCommunityIcons name="twitter" color="#fff" size={25} /> */}
                   </TouchableOpacity>
 
                   <TouchableOpacity
-                    style={[styles.icon, { backgroundColor: '#DD4B39' }]}>
+                    style={[styles.icon, {backgroundColor: '#DD4B39'}]}>
                     {/* <MaterialCommunityIcons name="google" color="#fff" size={25} /> */}
                   </TouchableOpacity>
                 </View>
@@ -239,5 +255,3 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly',
   },
 });
-
-

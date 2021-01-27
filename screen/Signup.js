@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {
   View,
   Text,
@@ -9,11 +9,10 @@ import {
   SafeAreaView,
 } from 'react-native';
 
-import Loading from '../components/Loading'
+import Loading from '../components/Loading';
 import * as Animatable from 'react-native-animatable';
 import LinearGradient from 'react-native-linear-gradient';
 import * as firebase from 'firebase';
-
 
 const SignUp = (props) => {
   const [Name, setName] = useState('');
@@ -47,7 +46,7 @@ const SignUp = (props) => {
                 onChangeText={function (currentInput) {
                   setName(currentInput);
                 }}
-                style={[styles.textInput, { color: '#fff' }]}
+                style={[styles.textInput, {color: '#fff'}]}
               />
             </View>
 
@@ -60,7 +59,7 @@ const SignUp = (props) => {
                 onChangeText={function (currentInput) {
                   setSID(currentInput);
                 }}
-                style={[styles.textInput, { color: '#fff' }]}
+                style={[styles.textInput, {color: '#fff'}]}
               />
             </View>
 
@@ -76,7 +75,7 @@ const SignUp = (props) => {
                   setEmail(currentInput);
                 }}
                 placeholderTextColor="#fff"
-                style={[styles.textInput, { color: '#fff' }]}
+                style={[styles.textInput, {color: '#fff'}]}
               />
             </View>
 
@@ -89,7 +88,7 @@ const SignUp = (props) => {
                 }}
                 placeholderTextColor="#fff"
                 secureTextEntry={true}
-                style={[styles.textInput, { color: '#fff' }]}
+                style={[styles.textInput, {color: '#fff'}]}
               />
             </View>
 
@@ -102,7 +101,9 @@ const SignUp = (props) => {
               duration={500}></Animatable.View>
 
             <TouchableOpacity>
-              <Text style={{ color: '#fff', marginTop: 10 }}>Forgot password?</Text>
+              <Text style={{color: '#fff', marginTop: 10}}>
+                Forgot password?
+              </Text>
             </TouchableOpacity>
 
             <View style={styles.button}>
@@ -115,11 +116,12 @@ const SignUp = (props) => {
                       .auth()
                       .createUserWithEmailAndPassword(Email, Password)
                       .then((userCreds) => {
-                        userCreds.user.updateProfile({ displayName: Name });
+                        userCreds.user.updateProfile({displayName: Name});
                         firebase
-                          .firestore()
-                          .collection("users")
-                          .doc(userCreds.user.uid)
+                          .database()
+                          .ref()
+                          .child('users/')
+                          .child(userCreds.user.uid)
                           .set({
                             name: Name,
                             sid: SID,
@@ -127,9 +129,9 @@ const SignUp = (props) => {
                           })
                           .then(() => {
                             setIsLoading(false);
-                            alert("Account created successfully!");
+                            alert('Account created successfully!');
                             console.log(userCreds.user);
-                            props.navigation.navigate("SignIn");
+                            props.navigation.navigate('SignIn');
                           })
                           .catch((error) => {
                             setIsLoading(false);
@@ -141,63 +143,72 @@ const SignUp = (props) => {
                         alert(error);
                       });
                   } else {
-                    alert("Fields can not be empty!");
+                    alert('Fields can not be empty!');
                   }
                 }}>
                 <LinearGradient
                   colors={['#8E24AA', '#311B92']}
                   style={styles.signIn}>
-                  <Text style={[styles.textSign, { color: '#fff' }]}>Sign Up</Text>
+                  <Text style={[styles.textSign, {color: '#fff'}]}>
+                    Sign Up
+                  </Text>
                 </LinearGradient>
               </TouchableOpacity>
 
               <TouchableOpacity
                 onPress={() => props.navigation.navigate('SignIn')}>
-                <Text style={{ textAlign: 'center', color: '#fff', marginTop: 10 }}>
+                <Text
+                  style={{textAlign: 'center', color: '#fff', marginTop: 10}}>
                   Already have an account ?
-                <Text style={{ color: '#55ACEE', paddingLeft: 10, fontSize: 18 }}>
+                  <Text
+                    style={{color: '#55ACEE', paddingLeft: 10, fontSize: 18}}>
                     Sign In
-                </Text>
+                  </Text>
                 </Text>
               </TouchableOpacity>
 
               <View
-                style={{ flexDirection: 'row', alignItems: 'center', margin: 10 }}>
-                <View style={{ flex: 1, height: 1, backgroundColor: '#fff' }} />
+                style={{
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  margin: 10,
+                }}>
+                <View style={{flex: 1, height: 1, backgroundColor: '#fff'}} />
                 <View>
-                  <Text style={{ width: 50, textAlign: 'center', color: '#fff' }}>
+                  <Text style={{width: 50, textAlign: 'center', color: '#fff'}}>
                     Or
-                </Text>
+                  </Text>
                 </View>
-                <View style={{ flex: 1, height: 1, backgroundColor: '#fff' }} />
+                <View style={{flex: 1, height: 1, backgroundColor: '#fff'}} />
               </View>
 
               <TouchableOpacity>
-                <Text style={{ textAlign: 'center', color: '#fff', marginTop: 10 }}>
+                <Text
+                  style={{textAlign: 'center', color: '#fff', marginTop: 10}}>
                   Sign up with Social Networks
-              </Text>
+                </Text>
               </TouchableOpacity>
             </View>
 
             <View style={styles.iconViewStyle}>
               <TouchableOpacity
-                style={[styles.icon, { backgroundColor: '#164CBD' }]}>
+                style={[styles.icon, {backgroundColor: '#164CBD'}]}>
                 {/* <MaterialCommunityIcons name="facebook" color="#fff" size={25} /> */}
               </TouchableOpacity>
 
               <TouchableOpacity
-                style={[styles.icon, { backgroundColor: '#55ACEE' }]}>
+                style={[styles.icon, {backgroundColor: '#55ACEE'}]}>
                 {/* <AntDesign name="twitter" color="#fff" size={25} /> */}
               </TouchableOpacity>
 
               <TouchableOpacity
-                style={[styles.icon, { backgroundColor: '#DD4B39' }]}>
+                style={[styles.icon, {backgroundColor: '#DD4B39'}]}>
                 {/* <AntDesign name="google" color="#fff" size={25} /> */}
               </TouchableOpacity>
             </View>
           </Animatable.View>
         </SafeAreaView>
-      </LinearGradient >
+      </LinearGradient>
     );
   }
 };
