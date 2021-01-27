@@ -1,6 +1,7 @@
 import React from 'react';
 import { Header } from 'react-native-elements';
 import { AuthContext } from '../providers/AuthProvider';
+import * as firebase from 'firebase';
 const HeaderMenu = (props) => {
   return (
     <AuthContext.Consumer>
