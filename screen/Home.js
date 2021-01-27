@@ -9,24 +9,28 @@ import {
   Button,
 } from 'react-native';
 import {AuthContext} from '../providers/AuthProvider';
-import LinearGradient from 'react-native-linear-gradient';
 
-import DrawerScreen from './Drawer';
+import HeaderMenu from '../components/HeaderMenu';
 
 import BG from '../assets/BG.png';
-import Card from '../assets/Card.png';
 
 const Home = (props) => {
   return (
     <AuthContext.Consumer>
       {(auth) => (
         <ImageBackground source={BG} style={styles.image}>
+          <HeaderMenu
+            DrawerFunction={() => {
+              props.navigation.toggleDrawer();
+            }}
+          />
           <StatusBar
             barStyle="light-content"
             hidden={false}
             backgroundColor="transparent"
             translucent={true}
           />
+
           <Text style={[styles.text, {color: 'red'}]}> Welcome to </Text>
           <Text style={styles.text}> {auth.CurrentUser.name} !</Text>
           {/* <View style={styles.card}>
@@ -54,7 +58,6 @@ const styles = StyleSheet.create({
   image: {
     flex: 1,
     resizeMode: 'cover',
-    justifyContent: 'center',
   },
 
   text: {
