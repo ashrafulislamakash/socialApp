@@ -1,28 +1,53 @@
-import React, {useState, useEffect} from 'react';
-import {View, StyleSheet, FlatList, ActivityIndicator} from 'react-native';
-import {Card, Button, Input} from 'react-native-elements';
-import PostCard from '../components/PostCard';
+import React, { useState, useEffect } from 'react';
+import { View, StyleSheet, FlatList, ActivityIndicator } from 'react-native';
+import { Card, Button, Input } from 'react-native-elements';
 import HeaderMenu from '../components/HeaderMenu';
 import Entypo from 'react-native-vector-icons/Entypo';
-
-import {AuthContext} from '../providers/AuthProvider';
-import {getPosts} from '../requests/Posts';
-import loading from '../components/Loading';
+import { useNetInfo } from "@react-native-community/netinfo";
+import PostCard from '../components/PostCard'
+import { AuthContext } from '../providers/AuthProvider';
+import { getPosts } from './../requests/Posts';
+import { getUsers } from './../requests/Users';
 
 const Home = (props) => {
+  const netinfo = useNetInfo();
+  if (netinfo.type != 'unknown' && netinfo.isInternetReachable) {
+    alert("No Internet!")
+  }
   const [posts, setPosts] = useState([]);
+  const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(false);
 
-  const loasPost = async () => {
+  const loadPosts = async () => {
+    setLoading(true)
     const response = await getPosts();
     if (response.ok) {
-      setPost(response.data);
+      setPosts(response.data);
     } else {
       alert(response.problem);
     }
   };
 
+  const loadUsers = async () => {
+    const response = await getUsers();
+    if (response.ok) {
+      setUsers(response.data);
+    } else {
+      alert(response.problem);
+    }
+    setLoading(false)
+  };
+
+  const getName = (id) => {
+    let name = '';
+    users.forEach((element) => {
+      if (element.id == id) { name = element.name; }
+    })
+    return name;
+  }
   useEffect(() => {
-    loasPost();
+    loadPosts();
+    loadUsers();
   }, []);
 
   return (
@@ -38,51 +63,27 @@ const Home = (props) => {
             <Input
               placeholder="What's On Your Mind?"
               leftIcon={<Entypo name="pencil" size={24} color="black" />}
-              onChangeText={(currentText) => {
-                setInput(currentText);
-              }}
             />
             <Button
               title="Post"
               type="outline"
-              onPress={function () {
-                setLoading(true);
-                // firebase
-                //   .firestore()
-                //   .collection('posts')
-                //   .add({
-                //     userId: auth.CurrentUser.uid,
-                //     body: input,
-                //     author: auth.CurrentUser.displayName,
-                //     created_at: firebase.firestore.Timestamp.now(),
-                //     likes: [],
-                //     comments: [],
-                //   })
-                //   .then(() => {
-                //     setLoading(false);
-                //     alert('Post created Successfully!');
-                //   })
-                //   .catch((error) => {
-                //     setLoading(false);
-                //     alert(error);
-                //   });
-              }}
-            />
+              onPress={function () { }} />
           </Card>
           <ActivityIndicator size="large" color="red" animating={loading} />
 
-          <FlatList
+          {/* <FlatList
             data={posts}
-            renderItem={({item}) => {
+            renderItem={({ item }) => {
               return (
                 <PostCard
-                  author={item.userId}
-                  title={item.title}
-                  body={item.body}
+                  author={getName(item.data.author)}
+                  title={item.data.title}
+                  body={item.data.body}
                 />
               );
             }}
-          />
+          /> */}
+
         </View>
       )}
     </AuthContext.Consumer>
