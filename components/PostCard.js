@@ -18,7 +18,7 @@ const PostCard = (props) => {
           activeOpacity={1}
         />
         <Text h4Style={{padding: 10}} h4>
-          {props.userId}
+          {props.author}
         </Text>
       </View>
       <Text style={{fontStyle: 'italic'}}> {props.title}</Text>
@@ -28,7 +28,6 @@ const PostCard = (props) => {
         }}>
         {props.body}
       </Text>
-
       <Card.Divider />
       <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
         <Button

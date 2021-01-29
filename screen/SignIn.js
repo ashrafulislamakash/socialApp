@@ -13,6 +13,7 @@ import * as Animatable from 'react-native-animatable';
 import LinearGradient from 'react-native-linear-gradient';
 import {AuthContext} from '../providers/AuthProvider';
 import * as firebase from 'firebase';
+import 'firebase/firestore';
 import Loading from '../components/Loading';
 
 const SignIn = (props) => {

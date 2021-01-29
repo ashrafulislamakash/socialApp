@@ -13,7 +13,8 @@ import Loading from '../components/Loading';
 import * as Animatable from 'react-native-animatable';
 import LinearGradient from 'react-native-linear-gradient';
 import * as firebase from 'firebase';
-import 'firebase/firestore/';
+import 'firebase/firestore';
+
 const SignUp = (props) => {
   const [Name, setName] = useState('');
   const [SID, setSID] = useState('');
@@ -129,7 +130,7 @@ const SignUp = (props) => {
                           .then(() => {
                             setIsLoading(false);
                             alert('Account created successfully!');
-                            console.log(userCreds.user);
+                            // console.log(userCreds.user);
                             props.navigation.navigate('SignIn');
                           })
                           .catch((error) => {

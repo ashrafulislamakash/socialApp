@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {View, StyleSheet, FlatList, ActivityIndicator} from 'react-native';
 import {Card, Button, Input} from 'react-native-elements';
 import HeaderMenu from '../components/HeaderMenu';
-import Entypo from 'react-native-vector-icons/Entypo';
+
 import {useNetInfo} from '@react-native-community/netinfo';
 import PostCard from '../components/PostCard';
 import {AuthContext} from '../providers/AuthProvider';
@@ -57,7 +57,7 @@ const Home = (props) => {
           <Card>
             <Input
               placeholder="What's On Your Mind?"
-              leftIcon={<Entypo name="pencil" size={24} color="black" />}
+              // leftIcon={<Entypo name="pencil" size={24} color="black" />}
               onChangeText={(currentText) => {
                 setInput(currentText);
               }}
