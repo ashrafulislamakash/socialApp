@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -11,8 +11,11 @@ import {
 
 import * as Animatable from 'react-native-animatable';
 import LinearGradient from 'react-native-linear-gradient';
-import {AuthContext} from '../providers/AuthProvider';
+import { AuthContext } from '../providers/AuthProvider';
 import * as firebase from 'firebase';
+
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+
 import 'firebase/firestore';
 import Loading from '../components/Loading';
 
@@ -42,7 +45,7 @@ const SignIn = (props) => {
 
               <Animatable.View animation="fadeInUpBig" style={styles.footer}>
                 <View style={styles.action}>
-                  {/* <MaterialCommunityIcons name="user-o" color="#fff" size={20} /> */}
+                  <MaterialCommunityIcons name="user-o" color="#fff" size={20} />
 
                   <TextInput
                     placeholder="E-mail"
@@ -50,7 +53,7 @@ const SignIn = (props) => {
                       setEmail(currentInput);
                     }}
                     placeholderTextColor="#fff"
-                    style={[styles.textInput, {color: '#fff'}]}
+                    style={[styles.textInput, { color: '#fff' }]}
                   />
                 </View>
 
@@ -59,7 +62,7 @@ const SignIn = (props) => {
                   duration={500}></Animatable.View>
 
                 <View style={styles.action}>
-                  {/* <MaterialCommunityIcons name="lock" color="#fff" size={20} /> */}
+                  <MaterialCommunityIcons name="lock" color="#fff" size={20} />
                   <TextInput
                     placeholder="Password"
                     onChangeText={function (currentInput) {
@@ -67,7 +70,7 @@ const SignIn = (props) => {
                     }}
                     placeholderTextColor="#fff"
                     secureTextEntry={true}
-                    style={[styles.textInput, {color: '#fff'}]}
+                    style={[styles.textInput, { color: '#fff' }]}
                   />
                 </View>
 
@@ -76,7 +79,7 @@ const SignIn = (props) => {
                   duration={500}></Animatable.View>
 
                 <TouchableOpacity>
-                  <Text style={{color: '#fff', marginTop: 10}}>
+                  <Text style={{ color: '#fff', marginTop: 10 }}>
                     Forgot password?
                   </Text>
                 </TouchableOpacity>
@@ -141,16 +144,16 @@ const SignIn = (props) => {
                       margin: 10,
                     }}>
                     <View
-                      style={{flex: 1, height: 1, backgroundColor: '#fff'}}
+                      style={{ flex: 1, height: 1, backgroundColor: '#fff' }}
                     />
                     <View>
                       <Text
-                        style={{width: 50, textAlign: 'center', color: '#fff'}}>
+                        style={{ width: 50, textAlign: 'center', color: '#fff' }}>
                         Or
                       </Text>
                     </View>
                     <View
-                      style={{flex: 1, height: 1, backgroundColor: '#fff'}}
+                      style={{ flex: 1, height: 1, backgroundColor: '#fff' }}
                     />
                   </View>
 
@@ -168,18 +171,18 @@ const SignIn = (props) => {
 
                 <View style={styles.iconViewStyle}>
                   <TouchableOpacity
-                    style={[styles.icon, {backgroundColor: '#164CBD'}]}>
-                    {/* <MaterialCommunityIcons name="facebook" color="#fff" size={25} /> */}
+                    style={[styles.icon, { backgroundColor: '#164CBD' }]}>
+                    <MaterialCommunityIcons name="facebook" color="#fff" size={25} />
                   </TouchableOpacity>
 
                   <TouchableOpacity
-                    style={[styles.icon, {backgroundColor: '#55ACEE'}]}>
-                    {/* <MaterialCommunityIcons name="twitter" color="#fff" size={25} /> */}
+                    style={[styles.icon, { backgroundColor: '#55ACEE' }]}>
+                    <MaterialCommunityIcons name="twitter" color="#fff" size={25} />
                   </TouchableOpacity>
 
                   <TouchableOpacity
-                    style={[styles.icon, {backgroundColor: '#DD4B39'}]}>
-                    {/* <MaterialCommunityIcons name="google" color="#fff" size={25} /> */}
+                    style={[styles.icon, { backgroundColor: '#DD4B39' }]}>
+                    <MaterialCommunityIcons name="google" color="#fff" size={25} />
                   </TouchableOpacity>
                 </View>
               </Animatable.View>

@@ -1,7 +1,7 @@
 import 'react-native-gesture-handler';
 import * as React from 'react';
-import {NavigationContainer} from '@react-navigation/native';
-import {AuthContext, AuthProvider} from './providers/AuthProvider';
+import { NavigationContainer } from '@react-navigation/native';
+import { AuthContext, AuthProvider } from './providers/AuthProvider';
 import * as firebase from 'firebase';
 import 'firebase/firestore';
 import AuthStack from './navigation/AuthStack';

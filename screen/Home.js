@@ -1,13 +1,14 @@
-import React, {useState, useEffect} from 'react';
-import {View, StyleSheet, FlatList, ActivityIndicator} from 'react-native';
-import {Card, Button, Input} from 'react-native-elements';
+import React, { useState, useEffect } from 'react';
+import { View, StyleSheet, FlatList, ActivityIndicator } from 'react-native';
+import { Card, Button, Input } from 'react-native-elements';
 import HeaderMenu from '../components/HeaderMenu';
 
-import {useNetInfo} from '@react-native-community/netinfo';
+import { useNetInfo } from '@react-native-community/netinfo';
 import PostCard from '../components/PostCard';
-import {AuthContext} from '../providers/AuthProvider';
+import { AuthContext } from '../providers/AuthProvider';
 import * as firebase from 'firebase';
 import 'firebase/firestore';
+
 
 const Home = (props) => {
   const netinfo = useNetInfo();
@@ -93,7 +94,7 @@ const Home = (props) => {
 
           <FlatList
             data={posts}
-            renderItem={({item}) => {
+            renderItem={({ item }) => {
               return (
                 <PostCard
                   author={item.data.author}
